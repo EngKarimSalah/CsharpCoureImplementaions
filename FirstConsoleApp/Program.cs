@@ -3,36 +3,44 @@
     internal class Program
     {
 
-        static void CountOneToTen()
-        {
-            //1-. Write a C# program that prints from 1 to 10
-            int counter;
+        //rejon 1 : system storage ( variables )
+        // store banck account information
+       static  string accountHolderName = "";
+       static   string HolderEmail = "";
+       static  string AccountNumber = "";
+       static  double accountBalance = 0;
+       static  bool isAccountActive = false; // account has not been created yet
 
-            for (counter = 1; counter <= 10; counter++)
+
+        public static bool CheckisActive()
+        {
+            if (isAccountActive == true)
             {
-                Console.WriteLine(counter);
+                Console.WriteLine("account information already exists please edit account information if you want to change it");
+                return true;
             }
-        }
+            else
+            {
+                return false;
+            }
 
-        static void PrintWelcomeMessage()
+        }
+        public static void AddAccountInformation()
         {
-            //2- print welcome message to the user and ask for their name
-            Console.WriteLine("Welcome to the application!");
-            Console.Write("Please enter your name: ");
-            string userName = Console.ReadLine();
-            Console.WriteLine("Hello" + userName);
-        }
+            Console.WriteLine("enter account holder name:");
+            accountHolderName = Console.ReadLine();
+            Console.WriteLine("enter account number:");
+            AccountNumber = Console.ReadLine();
+            Console.WriteLine("enter account balance:");
+            accountBalance = double.Parse(Console.ReadLine());
 
+            isAccountActive = true;
+            Console.WriteLine("account information added successfully.");
+        }
 
         static void Main(string[] args)
         {
-            //rejon 1 : system storage ( variables )
-            // store banck account information
-            string accountHolderName = "";
-            string HolderEmail = "";
-            string AccountNumber = "";
-            double accountBalance = 0;
-            bool isAccountActive = false; // account has not been created yet
+            
 
 
             //string Accoun1Name = "";  string Account1Number = "";  bool isAcc1Active = false;
@@ -61,23 +69,14 @@
 
 
                     case 0: // add account information
-                        if (isAccountActive == true)
-                        {
-                            Console.WriteLine("account information already exists please edit account information if you want to change it");
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("enter account holder name:");
-                            accountHolderName = Console.ReadLine();
-                            Console.WriteLine("enter account number:");
-                            AccountNumber = Console.ReadLine();
-                            Console.WriteLine("enter account balance:");
-                            accountBalance = double.Parse(Console.ReadLine());
 
-                            isAccountActive = true;
-                            Console.WriteLine("account information added successfully.");
+                        bool checkResult = CheckisActive();
+
+                        if(checkResult == false) //there is no account stored
+                        {
+                            AddAccountInformation();
                         }
+
                         break;
 
                     case 1:// view account information
@@ -94,6 +93,9 @@
                             Console.WriteLine("Account balance: " + accountBalance);
                         }
                         break;
+
+
+
 
                     case 2:// edit account information
                         Console.WriteLine("choose an option to edit:");
@@ -119,6 +121,10 @@
                         }
 
                         break;
+
+
+
+
 
                     case 3: // deposit funds
                         Console.WriteLine("Enter Account Number:");

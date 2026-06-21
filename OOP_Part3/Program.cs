@@ -1,10 +1,12 @@
 using OOP_Part3;
 using OOP_Part3.Models;
+using System.Runtime.Intrinsics.X86;
 
 namespace OOP_Part3
 {
     public class Program
     {
+        //system storage ( actual storage in memory for all lists ) 
         public static HospitalContext context = new HospitalContext
         {
             Patients = new List<Patient>(),
@@ -13,10 +15,34 @@ namespace OOP_Part3
             MedicalRecords = new List<MedicalRecord>(),
             AvailableSlots = new List<AvailableSlot>()
         };
+        // there are 5 empty lists exist in memory under context 
 
-        // ─────────────────────────────────────────────────────────────────────
-        // EASY 01 — Patient Registration
-        // ─────────────────────────────────────────────────────────────────────
+
+        //every user input should be validated 
+        // validation types ( value correctness validation => notnull, isString )
+        //                    value existance validation => right choice from showed list of options )
+
+
+        // To check existance
+        //      context.Availableslots.Any( s => s.Id == 5 )  ==> true or false  
+          //     specific data only needed to be verified
+
+        //     context.Availableslots.FirstOrDefault( s => s.Id == 5 )   ==> object(slot) or null
+        //      whole object data is needed to be used in the upcoming steps
+
+
+        // when printing /output list of options ==> showAllAvailable Slots
+        //  you should check List.count > 0
+
+        //any insertion / addition ==> must return Unique Identifier
+
+
+        //Linq most common functions
+        // - filtering=>       where (group satisfy condition)
+        //                     firstOrDefault ( only one object satisfy condition)
+        // - check existance=> Any ( true or false if object exist )
+        //- 
+
         public static void RegisterPatient()
         {
             Console.WriteLine("\n=== Register New Patient ===");
@@ -115,7 +141,7 @@ namespace OOP_Part3
         // ─────────────────────────────────────────────────────────────────────
         // EASY 04 — View Doctors by Specialization
         // ─────────────────────────────────────────────────────────────────────
-        public static void ViewDoctorsBySpecialization()
+        public static void ViewDoctorsBySpecialization() //read / view
         {
             Console.WriteLine("\n=== Search Doctors by Specialization ===");
 
@@ -148,6 +174,14 @@ namespace OOP_Part3
             Console.Write("Enter doctor ID: ");
             int doctorId = int.Parse(Console.ReadLine());
 
+            bool result = context.Doctors.Any(d => d.doctorId == doctorId);
+            if(result == false)
+            {
+                Console.WriteLine("doctor not found please insert a correct Id");
+                return;
+            }
+
+
             Console.Write("Enter slot date (e.g. 2026-07-10): ");
             string date = Console.ReadLine();
 
@@ -165,13 +199,13 @@ namespace OOP_Part3
                 isBooked = false
             });
 
-            Console.WriteLine($"Slot added successfully.");
+            Console.WriteLine($"Slot added successfully with slotId: {slotId}");
         }
 
         // ─────────────────────────────────────────────────────────────────────
         // MEDIUM 06 — Book an Appointment
         // ─────────────────────────────────────────────────────────────────────
-        public static void BookAppointment()
+        public static void BookAppointment() //create / add 
         {
             Console.WriteLine("\n=== Book an Appointment ===");
 
@@ -202,16 +236,16 @@ namespace OOP_Part3
 
             context.Appointments.Add(new Appointment
             {
-                appointmentId = appointmentId,
-                patientId = patientId,
-                doctorId = doctorId,
-                slotId = slotId,
-                appointmentDate = selectedSlot.slotDate,
-                appointmentTime = selectedSlot.slotTime,
-                status = "Scheduled"
+                appointmentId = appointmentId, //genretaed
+                patientId = patientId,         // user input his number
+                doctorId = doctorId,           // user input from list viewed
+                slotId = slotId,               // user input from list viewed
+                appointmentDate = selectedSlot.slotDate, // system calcuated 
+                appointmentTime = selectedSlot.slotTime,  // system calcuated 
+                status = "Scheduled"              // default value
             });
 
-            selectedSlot.isBooked = true;
+            selectedSlot.isBooked = true;  
 
             Console.WriteLine($"Appointment booked successfully! Appointment ID: {appointmentId}" +
                               $" | Date: {selectedSlot.slotDate} | Time: {selectedSlot.slotTime}");
@@ -220,7 +254,7 @@ namespace OOP_Part3
         // ─────────────────────────────────────────────────────────────────────
         // MEDIUM 07 — Cancel an Appointment
         // ─────────────────────────────────────────────────────────────────────
-        public static void CancelAppointment()
+        public static void CancelAppointment() //edit/update data
         {
             Console.WriteLine("\n=== Cancel an Appointment ===");
 
@@ -259,12 +293,10 @@ namespace OOP_Part3
             Appointment appointment = context.Appointments
                           .FirstOrDefault(a => a.appointmentId == appointmentId);
 
-            decimal fee = context.Doctors
-                          .Where(d => d.doctorId == appointment.doctorId)
-                          .Select(d => d.consultationFee)
-                          .FirstOrDefault();
+            Doctor SelectedDoctor = context.Doctors.FirstOrDefault(d => d.doctorId == appointmentId);
+        
 
-            int recordId = context.MedicalRecords.Count + 1;
+        int recordId = context.MedicalRecords.Count + 1;
 
             context.MedicalRecords.Add(new MedicalRecord
             {
@@ -275,13 +307,12 @@ namespace OOP_Part3
                 visitDate = appointment.appointmentDate,
                 diagnosis = diagnosis,
                 prescription = prescription,
-                visitFee = fee
-            });
+                visitFee = SelectedDoctor.consultationFee
+        });
 
             appointment.status = "Completed";
 
-            Console.WriteLine($"Medical record created successfully. Record ID: {recordId}" +
-                              $" | Fee charged: {fee:C}");
+            Console.WriteLine($"Medical record created successfully. Record ID: {recordId}");
         }
 
         // ─────────────────────────────────────────────────────────────────────
@@ -350,6 +381,14 @@ namespace OOP_Part3
         // ─────────────────────────────────────────────────────────────────────
         static void Main(string[] args)
         {
+
+            //Console.WriteLine("Enter your name");
+            //string name = Console.ReadLine();
+
+            ////object initializer
+            //Patient p2 = new Patient {patientId =2, patientName=name  };
+
+
             bool exit = false;
 
             while (exit == false)

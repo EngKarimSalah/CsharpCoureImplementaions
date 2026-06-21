@@ -5,7 +5,7 @@ namespace OOP_Part3
 {
     public class Program
     {
-        public static HospitalContext context = new HospitalContext()
+        public static HospitalContext context = new HospitalContext
         {
             Patients = new List<Patient>(),
             Doctors = new List<Doctor>(),

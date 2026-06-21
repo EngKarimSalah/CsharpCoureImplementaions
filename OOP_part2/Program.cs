@@ -33,7 +33,11 @@
             accounts.Add(new BankAccount(4, 113));
 
 
-            accounts[0].holderName = "Karim";
+            Console.WriteLine("enter your name: ");
+            string userName = Console.ReadLine();
+
+
+            accounts[0].holderName = userName;
             accounts[1].holderName = "Ali";
             accounts[2].holderName = "Sara";
             accounts[3].holderName = "Omar";

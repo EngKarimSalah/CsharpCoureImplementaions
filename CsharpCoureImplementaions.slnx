@@ -4,5 +4,6 @@
   <Project Path="FirstConsoleApp/FirstConsoleApp.csproj" />
   <Project Path="OOP-Part1/OOP-Part1.csproj" Id="0735c9ce-7095-4d3b-8060-84b7c005d3bc" />
   <Project Path="OOP_part2/OOP_part2.csproj" Id="8d66fbd2-3341-406b-8a6a-fcef65683381" />
+  <Project Path="OOP_Part3/OOP_Part3.csproj" />
   <Project Path="secondProject/secondProject.csproj" />
 </Solution>

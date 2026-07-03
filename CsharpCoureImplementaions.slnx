@@ -2,6 +2,7 @@
   <Project Path="BuiltInFunctions/Functions.csproj" Id="72fff0bd-74b3-46c5-a57b-3e425eb48079" />
   <Project Path="Collections/Collections.csproj" Id="694d8066-1509-4354-af33-0251f720c6af" />
   <Project Path="DataModelingAndRelationships/DataModelingAndRelationships.csproj" />
+  <Project Path="EFCorePart1/EFCorePart1.csproj" />
   <Project Path="FirstConsoleApp/FirstConsoleApp.csproj" />
   <Project Path="FMS_Solution/FMS_Solution.csproj" />
   <Project Path="OOP-Part1/OOP-Part1.csproj" Id="0735c9ce-7095-4d3b-8060-84b7c005d3bc" />

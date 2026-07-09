@@ -1,10 +1,13 @@
 <Solution>
+  <Project Path="Backend_session_10/Backend_session_10.csproj" />
+  <Project Path="Backend_session_10_SoC/Backend_session_10_SoC.csproj" />
   <Project Path="BuiltInFunctions/Functions.csproj" Id="72fff0bd-74b3-46c5-a57b-3e425eb48079" />
   <Project Path="Collections/Collections.csproj" Id="694d8066-1509-4354-af33-0251f720c6af" />
   <Project Path="DataModelingAndRelationships/DataModelingAndRelationships.csproj" />
   <Project Path="EFCorePart1/EFCorePart1.csproj" />
   <Project Path="FirstConsoleApp/FirstConsoleApp.csproj" />
   <Project Path="FMS_Solution/FMS_Solution.csproj" />
+  <Project Path="HospitalSoC/HospitalSoC.csproj" />
   <Project Path="OOP-Part1/OOP-Part1.csproj" Id="0735c9ce-7095-4d3b-8060-84b7c005d3bc" />
   <Project Path="OOP_part2/OOP_part2.csproj" Id="8d66fbd2-3341-406b-8a6a-fcef65683381" />
   <Project Path="OOP_Part3/OOP_Part3.csproj" />

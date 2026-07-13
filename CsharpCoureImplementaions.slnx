@@ -6,6 +6,7 @@
   <Project Path="DataModelingAndRelationships/DataModelingAndRelationships.csproj" />
   <Project Path="EFCorePart1/EFCorePart1.csproj" />
   <Project Path="FirstConsoleApp/FirstConsoleApp.csproj" />
+  <Project Path="FirstWebApp/FirstWebApp.csproj" />
   <Project Path="FMS_Solution/FMS_Solution.csproj" />
   <Project Path="HospitalSoC/HospitalSoC.csproj" />
   <Project Path="OOP-Part1/OOP-Part1.csproj" Id="0735c9ce-7095-4d3b-8060-84b7c005d3bc" />
